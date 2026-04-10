@@ -1,0 +1,94 @@
+MIND DUMP APP - NEW DESIGN QUICK REFERENCE
+===========================================
+
+NEW USER WORKFLOW:
+-----------------
+
+1. THROUGHOUT THE DAY:
+   - Open app at http://localhost:5000
+   - See quick form with 3 fields:
+     * Text area: "What's on your mind?"
+     * Mood slider (1-10)
+     * Energy slider (1-10)
+   - Type thought in 10-30 seconds
+   - Click "Log Thought & Continue"
+   - Form clears, thought appears in list below
+   - Repeat as many times as you want
+
+2. END OF DAY:
+   - Click "Integrate & Review Today" button
+   - App analyzes ALL thoughts together
+   - See unified report with:
+     * Mood range (your high/low/average)
+     * Energy level (average)
+     * Day summary (coherent narrative)
+     * Emotional arc (mood progression through day)
+     * Main themes (what you were thinking about)
+     * Recommendations (2-3 personalized suggestions)
+
+3. ANYTIME:
+   - Click "View History" to see past thoughts/reports
+
+
+KEY FEATURES:
+-------------
+
+* Collection Analysis: Thinks about your whole day together, not individual thoughts
+* Emotional Arc: Shows if mood improved, declined, or stayed stable
+* Main Themes: Extracts top concepts from all your thoughts
+* Quick Logging: 3 fields only (was 7 before)
+* Timestamps: Each thought automatically timestamped
+* Live List: See all today's thoughts as you log them
+* Mobile Friendly: Works great on phone/tablet
+
+
+TECHNICAL NOTES:
+----------------
+
+* Database: SQLite (local, private)
+* Backend: Flask with new /api/thought and /api/integrate/daily endpoints
+* Analysis: analyze_collection() function analyzes thoughts together
+* No external APIs needed
+* No cloud, no tracking, no accounts
+
+
+FILES CHANGED:
+--------------
+
+app.py:
+  - New POST /api/thought endpoint
+  - New GET /api/integrate/daily endpoint  
+  - Simplified database schema (thoughts table)
+  - Removed old POST /api/dump endpoint
+
+analysis.py:
+  - Added analyze_collection() function
+  - Analyzes multiple thoughts as unified whole
+  - Returns emotional_arc, themes, integrated summary
+
+templates/index.html:
+  - Complete UI redesign
+  - Quick form + thoughts list + report view
+  - Mobile-optimized layout
+  - Real-time updates
+
+requirements.txt:
+  - Updated to more flexible version specs
+
+README.md:
+  - Updated all documentation
+  - New API endpoint docs
+  - Explains collection analysis
+
+
+TO USE:
+-------
+
+1. cd personal-life-os
+2. pip install -r requirements.txt
+3. python app.py
+4. Open http://localhost:5000
+5. Start logging thoughts!
+
+
+READY FOR RACHEL - April 10, 2026
